@@ -1,1 +1,144 @@
-"# Shopping_list"  initgit add README.mdgit commit -m "first commit"git branch -M maingit remote add origin https://github.com/Alfiotirendi/Shopping_list.gitgit push -u origin main
+# Shopping List (Python + MySQL)
+
+**Bilingual README — English / Italiano**
+
+---
+
+## 📌 Project Overview / Panoramica del progetto
+
+**EN — Description**
+This project is a simple command-line shopping list manager written in Python. It connects to a MySQL database and allows users to register, log in, and manage their own shopping list. The interaction messages inside the code are currently in Italian.
+
+**IT — Descrizione**
+Questo progetto è un semplice gestore di lista della spesa da riga di comando scritto in Python. Si collega a un database MySQL e consente agli utenti di registrarsi, accedere e gestire la propria lista della spesa. I messaggi di interazione all'interno del codice sono attualmente in italiano.
+
+---
+
+## 🧩 Database schema / Schema del database
+
+The program expects a MySQL database named `shopping` with two tables: `utenti` and `spesa`.
+
+**EN — Schema used in this project:**
+
+```sql
+CREATE DATABASE shopping;
+USE shopping;
+
+CREATE TABLE utenti (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(15) UNIQUE
+);
+
+CREATE TABLE spesa (
+  id_utente INT,
+  oggetto VARCHAR(15),
+  FOREIGN KEY (id_utente) REFERENCES utenti(id),
+  UNIQUE(id_utente, oggetto)
+);
+```
+
+**IT — Schema usato in questo progetto:**
+Il programma richiede un database MySQL chiamato `shopping` con due tabelle: `utenti` e `spesa` (come nello schema SQL sopra).
+
+---
+
+## ⚙️ Requirements / Requisiti
+
+* Python 3
+* MySQL server
+* Python library: `mysql-connector-python`
+
+Install with:
+
+```bash
+pip install mysql-connector-python
+```
+
+---
+
+## ▶️ How to run / Come eseguire
+
+1. Create the MySQL database and tables (see schema above).
+2. Update the connection parameters in the code if needed (user, password, host).
+3. Run the program:
+
+```bash
+python main.py
+```
+
+The program will open a menu to manage the shopping list.
+
+---
+
+## 🧭 Functions / Funzioni
+
+**list(number, cursor)**
+
+* EN: Shows the shopping list for a given user ID.
+* IT: Mostra la lista della spesa per un determinato utente.
+
+**add(id, cursor, max)**
+
+* EN: Adds a new product to the user’s shopping list if the maximum is not reached.
+* IT: Aggiunge un nuovo prodotto alla lista della spesa dell’utente se non è stato raggiunto il limite massimo.
+
+**remove(id, cursor)**
+
+* EN: Removes a chosen product from the user’s shopping list.
+* IT: Rimuove un prodotto scelto dalla lista della spesa dell’utente.
+
+**empty(id, cursor)**
+
+* EN: Empties the shopping list of a user after confirmation.
+* IT: Svuota la lista della spesa di un utente previa conferma.
+
+**login(cursor)**
+
+* EN: Prompts the user to enter a name, registers new users, or logs in existing users. Returns the user ID.
+* IT: Chiede all’utente di inserire un nome, registra nuovi utenti o accede a utenti esistenti. Restituisce l’ID utente.
+
+**delete\_id(id, cursor)**
+
+* EN: Deletes a user and all related products after confirmation.
+* IT: Elimina un utente e tutti i prodotti associati previa conferma.
+
+---
+
+## 📋 Program flow / Flusso del programma
+
+Once started, the program:
+
+1. Connects to the MySQL database.
+2. Prompts the user to log in or register.
+3. Displays a menu with the following options:
+
+   * 1: Add product
+   * 2: Remove product
+   * 3: Show shopping list
+   * 4: Empty shopping list
+   * 5: Delete user
+   * 6: Change user
+   * 7: Exit
+
+**IT — Flusso:**
+All’avvio, il programma:
+
+1. Si connette al database MySQL.
+2. Chiede all’utente di accedere o registrarsi.
+3. Mostra un menu con le seguenti opzioni:
+
+   * 1: Aggiungi prodotto
+   * 2: Rimuovi prodotto
+   * 3: Visualizza lista della spesa
+   * 4: Svuota lista della spesa
+   * 5: Elimina utente
+   * 6: Cambia utente
+   * 7: Esci
+
+---
+
+## 🧾 Notes / Note
+
+* The program currently uses Italian for `print()` and `input()` prompts.
+* Documentation is provided in both English and Italian for clarity.
+* You can modify the printed strings to support English or bilingual prompts if desired.
